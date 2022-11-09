@@ -3,6 +3,7 @@ package com.example.gestiondepharmacie;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,14 +26,17 @@ public class MainActivity extends AppCompatActivity {
     Bluetooth bluetooth;
     private final static int REQUEST_ENABLE_BT = 1111;
     private final static String ADDRR = "00:13:EF:00:96:DB";
-
+    TextView name, name2 , temmp ,hume;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        bluetooth = new Bluetooth(this);
+        temmp = findViewById(R.id.temp);
+
+        bluetooth = new Bluetooth(context);
 
         bluetooth.setDeviceCallback(new DeviceCallback() {
             @Override public void onDeviceConnected(BluetoothDevice device) {
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage(String msg){
         bluetooth.send(msg);
     }
+
 
 
 }
